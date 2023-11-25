@@ -1,7 +1,19 @@
-import { Button, Center, Image, Input, Stack, Text } from "@chakra-ui/react";
+import { useMutation } from "@apollo/client";
+import {
+  Button,
+  Center,
+  Image,
+  Input,
+  Stack,
+  Text,
+  Toast,
+} from "@chakra-ui/react";
 import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import UserOperations from "../../graphql/operations/user";
+import { CreateUserData, CreateUsernameVariables } from "../../util/types";
+import toast from "react-hot-toast";
 
 // mutations are used when we need to create or modify values.
 // query is to get the data.
@@ -16,10 +28,28 @@ const Auth: React.FunctionComponent<IAuthProps> = ({
   reloadSession,
 }) => {
   const [username, setUsername] = useState("");
+  const [createUsername, { loading, error }] = useMutation<
+    CreateUserData,
+    CreateUsernameVariables
+  >(UserOperations.Mutations.createUsername);
 
   const onSubmit = async () => {
+    if (!username) return;
     try {
-    } catch (error) {
+      const { data } = await createUsername({ variables: { username } });
+      if (!data?.createUsername) {
+        throw new Error();
+      }
+      if (data.createUsername.error) {
+        const {
+          createUsername: { error },
+        } = data;
+        throw new Error(error);
+      }
+      toast.success("Username successfully created!");
+      reloadSession();
+    } catch (error: any) {
+      toast.error(error?.message);
       console.log("onSubmit error", error);
     }
   };
