@@ -65,7 +65,7 @@ const Auth: React.FunctionComponent<IAuthProps> = ({
               placeholder="Enter a username"
               value={username}
             />
-            <Button width="100%" onClick={onSubmit}>
+            <Button width="100%" isLoading={loading} onClick={onSubmit}>
               Save
             </Button>
           </>
