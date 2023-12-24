@@ -3,9 +3,13 @@ import { SearchedUser } from "../../../../util/types";
 
 interface UserSearchListProps {
   users: SearchedUser[];
+  addParticipant: (user: SearchedUser) => void;
 }
 
-export default function UserSearchList({ users }: UserSearchListProps) {
+export default function UserSearchList({
+  users,
+  addParticipant,
+}: UserSearchListProps) {
   return (
     <>
       {users.length === 0 ? (
@@ -29,7 +33,7 @@ export default function UserSearchList({ users }: UserSearchListProps) {
                 <Flex align="center" width="100%" justify="space-between">
                   <Text color="whiteAlpha.700">{user.username}</Text>
                   <Button
-                    onClick={() => {}}
+                    onClick={() => addParticipant(user)}
                     _hover={{ bg: "brand.100" }}
                     bg="brand.100"
                   >
