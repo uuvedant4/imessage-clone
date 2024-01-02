@@ -1,4 +1,4 @@
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { signOut } from "next-auth/react";
 import {
   Button,
@@ -13,7 +13,10 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import UserOperations from "../../../../graphql/operations/user";
+import ConversationOperations from "../../../../graphql/operations/conversation";
 import {
+  CreateConversationData,
+  CreateConversationInput,
   SearchUserData,
   SearchUsersInput,
   SearchedUser,
@@ -21,22 +24,32 @@ import {
 import UserSearchList from "./UserSearchList";
 import Participants from "./Participants";
 import toast from "react-hot-toast";
+import { Session } from "next-auth";
 
 interface ConversationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  session: Session;
 }
 
 const ConversationModal: React.FC<ConversationModalProps> = ({
   isOpen,
   onClose,
+  session,
 }) => {
+  const {
+    user: { id: userId },
+  } = session;
   const [username, setUsername] = useState("");
   const [participants, setParticipants] = useState<Array<SearchedUser>>([]);
   const [searchUsers, { data, error, loading }] = useLazyQuery<
     SearchUserData,
     SearchUsersInput
   >(UserOperations.Queries.searchUsers);
+  const [createConversation, { loading: createConversationLoading }] =
+    useMutation<CreateConversationData, CreateConversationInput>(
+      ConversationOperations.Mutations.createConversation
+    );
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +66,12 @@ const ConversationModal: React.FC<ConversationModalProps> = ({
   };
 
   const onCreateConversation = async () => {
+    const participantIds = [...participants.map((p) => p.id), userId];
     try {
+      const { data } = await createConversation({
+        variables: { participantIds },
+      });
+      console.log(data, participantIds);
     } catch (error: any) {
       console.log("onCreateConversation error", error);
       toast.error(error?.message);
@@ -92,11 +110,12 @@ const ConversationModal: React.FC<ConversationModalProps> = ({
                 removeParticipant={removeParticipant}
               />
               <Button
-                onClick={() => {}}
+                onClick={onCreateConversation}
                 _hover={{ bg: "brand.100" }}
                 mt={6}
                 bg="brand.100"
                 width="100%"
+                isLoading={createConversationLoading}
               >
                 Create Conversation
               </Button>

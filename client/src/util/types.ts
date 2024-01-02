@@ -21,3 +21,13 @@ export interface SearchedUser {
 export interface SearchUserData {
   searchUsers: Array<SearchedUser>;
 }
+
+export interface CreateConversationData {
+  createConversation: {
+    conversationId: string;
+  };
+}
+
+export interface CreateConversationInput {
+  participantIds: string[];
+}
