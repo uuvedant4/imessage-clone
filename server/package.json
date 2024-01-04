@@ -1,31 +1,37 @@
 {
-  "name": "server",
+  "name": "imessage-clone",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/server": "^4.9.5",
-    "@prisma/client": "^5.6.0",
-    "body-parser": "^1.20.2",
+    "@apollo/server": "^4.2.2",
+    "@graphql-tools/schema": "^9.0.4",
+    "@prisma/client": "^4.0.0",
+    "body-parser": "^1.20.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "graphql": "^16.8.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "graphql": "^16.6.0",
+    "graphql-subscriptions": "^2.0.0",
     "graphql-tag": "^2.12.6",
+    "graphql-ws": "^5.11.2",
     "lodash.merge": "^4.6.2",
     "next-auth": "^4.10.3",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "ws": "^8.9.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/lodash.merge": "^4.6.9",
-    "prisma": "^5.6.0"
+    "@types/cors": "^2.8.12",
+    "@types/lodash.merge": "^4.6.7",
+    "@types/ws": "^8.5.3",
+    "nodemon": "^2.0.19",
+    "prisma": "^4.0.0",
+    "typescript": "^4.8.3"
   }
 }

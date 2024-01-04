@@ -12,7 +12,7 @@ import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import UserOperations from "../../graphql/operations/user";
-import { CreateUserData, CreateUsernameVariables } from "../../util/types";
+import { CreateUsernameData, CreateUsernameVariables } from "../../util/types";
 import toast from "react-hot-toast";
 
 // mutations are used when we need to create or modify values.
@@ -29,7 +29,7 @@ const Auth: React.FunctionComponent<IAuthProps> = ({
 }) => {
   const [username, setUsername] = useState("");
   const [createUsername, { loading, error }] = useMutation<
-    CreateUserData,
+    CreateUsernameData,
     CreateUsernameVariables
   >(UserOperations.Mutations.createUsername);
 
@@ -37,15 +37,15 @@ const Auth: React.FunctionComponent<IAuthProps> = ({
     if (!username) return;
     try {
       const { data } = await createUsername({ variables: { username } });
-      if (!data?.createUsername) {
-        throw new Error();
-      }
-      if (data.createUsername.error) {
-        const {
-          createUsername: { error },
-        } = data;
-        throw new Error(error);
-      }
+      // if (!data?.createUsername) {
+      //   throw new Error();
+      // }
+      // if (data.createUsername.error) {
+      //   const {
+      //     createUsername: { error },
+      //   } = data;
+      //   throw new Error(error);
+      // }
       toast.success("Username successfully created!");
       reloadSession();
     } catch (error: any) {

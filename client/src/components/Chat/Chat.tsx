@@ -1,13 +1,13 @@
-import { Button, Flex } from "@chakra-ui/react";
-import ConversationsWrapper from "./Conversations/ConversationsWrapper";
+import { Box, Flex } from "@chakra-ui/react";
 import { Session } from "next-auth";
+import ConversationsWrapper from "./Conversations/ConversationsWrapper";
 import FeedWrapper from "./Feed/FeedWrapper";
 
-interface IChatProps {
+interface ChatProps {
   session: Session;
 }
 
-const Chat: React.FC<IChatProps> = ({ session }) => {
+const Chat: React.FC<ChatProps> = ({ session }) => {
   return (
     <Flex height="100vh">
       <ConversationsWrapper session={session} />
