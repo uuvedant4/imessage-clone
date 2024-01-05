@@ -4,7 +4,7 @@
 
  *Overview*
 
-iMessage clone built with cutting-edge technologies, including Next.js, GraphQL, Prisma, Chakra UI, Web Sockets, and MongoDB. The application not only replicates the sleek user interface of iMessage but also incorporates advanced functionalities such as group chat and OAuth authentication using NextAuth.
+iMessage clone built with cutting-edge technologies, including Next.js, GraphQL, Prisma, TypeScript, Chakra UI, Web Sockets, and MongoDB. The application not only replicates the sleek user interface of iMessage but also incorporates advanced functionalities such as group chat and OAuth authentication using NextAuth.
 
 *Features*
 
