@@ -19,13 +19,12 @@ iMessage clone built with cutting-edge technologies, including Next.js, GraphQL,
 
 *Screenshots*
 
-<!-- Add your screenshots here with appropriate captions -->
+*🔐 Secure OAuth authentication using NextAuth for a seamless and secure login process.*
 
 ![Screenshot 1](screenshots/screenshot1.png)
-**🔐 Secure OAuth authentication using NextAuth for a seamless and secure login process.**
 
+*Create unique username for every user.*
 ![Screenshot 2](screenshots/screenshot2.png)
-**Create unique username for every user.**
 
+*Group chat feature which allows users to engage in conversations with multiple participants.*
 ![Screenshot 2](screenshots/screenshot3.png)
-**Group chat feature which allows users to engage in conversations with multiple participants.**
